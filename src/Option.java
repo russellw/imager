@@ -19,16 +19,7 @@ abstract class Option {
     this.names = names;
   }
 
-  private String sortKey() {
-    var s = names[0];
-    if (Character.isUpperCase(s.charAt(0))) s += ' ';
-    return s.toLowerCase(Locale.ROOT);
-  }
-
   private static void help(Option[] options) {
-    // print options in alphabetical order
-    Arrays.sort(options, Comparator.comparing(Option::sortKey));
-
     // calculate width of the first column
     // so we know how much to indent the second
     var width = 0;
@@ -45,10 +36,6 @@ abstract class Option {
     System.out.print("@file");
     for (var i = 5; i < width; i++) System.out.print(' ');
     System.out.println("read args from file");
-
-    System.out.print('-');
-    for (var i = 1; i < width; i++) System.out.print(' ');
-    System.out.println("read from stdin");
 
     for (var option : options) {
       var n = 1 + option.names[0].length();
