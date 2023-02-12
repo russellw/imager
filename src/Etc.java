@@ -1,4 +1,3 @@
-
 @SuppressWarnings("unused")
 final class Etc {
   static void dbg(Object a) {
