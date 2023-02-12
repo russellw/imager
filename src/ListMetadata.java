@@ -8,10 +8,10 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import javax.imageio.ImageIO;
 
-final class Dump {
+final class ListMetadata {
   private static final Option[] OPTIONS = {};
 
-  private static void dump(String file) throws IOException {
+  private static void print(String file) throws IOException {
     switch (Etc.ext(file)) {
       case "png", "jpg", "jpeg" -> {
         var in = ImageIO.read(new File(file));
@@ -31,17 +31,17 @@ final class Dump {
             new SimpleFileVisitor<>() {
               public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
                   throws IOException {
-                dump(file.toString());
+                print(file.toString());
                 return FileVisitResult.CONTINUE;
               }
             });
         continue;
       }
       if (file.endsWith(".lst")) {
-        for (var s : Files.readAllLines(path, StandardCharsets.UTF_8)) dump(s);
+        for (var s : Files.readAllLines(path, StandardCharsets.UTF_8)) print(s);
         continue;
       }
-      dump(file);
+      print(file);
     }
   }
 }
