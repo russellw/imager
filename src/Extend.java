@@ -38,6 +38,8 @@ final class Extend {
     if (height == 0) height = in.getHeight();
     var out = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
     var g2 = out.createGraphics();
+    g2.setBackground(Color.WHITE);
+    g2.clearRect(0, 0, width, height);
     g2.drawImage(in, x, y, null);
     ImageIO.write(out, "png", new File("a.png"));
   }
